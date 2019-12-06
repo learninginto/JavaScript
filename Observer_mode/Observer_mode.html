@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .con{
+            width:536px;
+            height: 480px;
+            border: 1px solid #000000;
+            overflow: hidden;
+            position: relative;
+        }
+        #msg{
+            width:440px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 30px;
+            font-size: 25px;
+            padding: 0px 10px;
+            outline: none;
+            vertical-align: middle;
+            
+        }
+        button
+        {
+            width:74px;
+            height: 30px;
+            border-radius: 30px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="con">
+        <video src="./mv/test3.mp4" autoplay controls></video>
+    </div>
+    <input type="text" name="msg" id="msg"><button>发送</button>
+
+    <script type="module">
+        import PopMessage from "./js/PopMessage.js";
+        var bn,msg,con;
+        init();
+        function init(){
+            bn=document.querySelector("button");
+            msg=document.querySelector("#msg");
+            con=document.querySelector(".con");
+            bn.addEventListener("click",clickHandler);
+            document.addEventListener("keydown",clickHandler)
+        }
+
+        function clickHandler(e){
+            if(e.type==="keydown" && e.keyCode!==13) return;
+            let pop=new PopMessage(msg.value);
+            pop.appendTo(con);
+            msg.value="";
+        }
+    </script>
+</body>
+</html>
